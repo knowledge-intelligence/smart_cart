@@ -1,8 +1,7 @@
-![YDLIDAR](sdk/image/YDLidar.jpg  "YDLIDAR")
-# YDLIDAR ROS2 PACKAGE V1.4.5
-ROS2 node and test application for YDLIDAR
+![YDLIDAR](images/YDLidar.jpg  "YDLIDAR")
+# YDLIDAR ROS2 Driver
 
-Visit EAI Website for more details about YDLIDAR.
+ydlidar_ros2_driver is a new ros package, which is designed to gradually become the standard driver package for ydlidar devices in the ros2 environment.
 
 ## How to [install ROS2](https://index.ros.org/doc/ros2/Installation)
 [ubuntu](https://index.ros.org/doc/ros2/Installation/Dashing/Linux-Install-Debians/)
@@ -12,252 +11,172 @@ Visit EAI Website for more details about YDLIDAR.
 ## How to Create a ROS2 workspace
 [Create a workspace](https://index.ros.org/doc/ros2/Tutorials/Colcon-Tutorial/#create-a-workspace)
 
-## How to build YDLIDAR ros2 package
-    1) Clone this project to your ament's workspace src folder 
-    2) Running ament to build ydlidar_node and ydlidar_client
-    3) Create the name "/dev/ydlidar" for YDLIDAR
-    --$ cd workspace/ydlidar_ros2/startup
-    --$ sudo chmod 777 ./*
-    --$ sudo sh initenv.sh
-Note: Download and Build details [here](docs/ydlidar.md)
 
-## How to run YDLIDAR ros2 package
+## Compile & Install YDLidar SDK
 
-### 1. Run YDLIDAR node and view using test application
-	$ros2 run ydlidar ydlidar_node
+ydlidar_ros2_driver depends on YDLidar-SDK library. If you have never installed YDLidar-SDK library or it is out of date, you must first install YDLidar-SDK library. If you have installed the latest version of YDLidar-SDK, skip this step and go to the next step.
 
-	$ros2 run ydlidar ydlidar_client
+1. Download or clone the [YDLIDAR/YDLidar-SDK](https://github.com/YDLIDAR/YDLidar-SDK) repository on GitHub.
+2. Compile and install the YDLidar-SDK under the ***build*** directory following `README.md` of YDLIDAR/YDLidar-SDK.
 
-Note: You should see YDLIDAR's scan result in the console
+## Clone ydlidar_ros2_driver
 
-### 2.Run YDLIDAR node and view using test application by launch
-	$launch $(ros2 pkg prefix ydlidar)/share/ydlidar/launch/ydlidar.py
+1. Clone ydlidar_ros2_driver package for github : 
 
-	$ros2 run ydldiar ydlidar_client or ros2 topic echo /scan
-or
+   `git clone https://github.com/YDLIDAR/ydlidar_ros2_driver.git ydlidar_ros2_ws/src/ydlidar_ros2_driver`
 
-	$ros2 launch ydlidar ydlidar_launch.py
+2. Build ydlidar_ros2_driver package :
 
-## Dataset
-|LIDAR      | Model  |  Baudrate |  SampleRate(K) | Range(m)  		   |  Frequency(HZ) | Intenstiy(bit) | SingleChannel | voltage(V)|
-| :-------- |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
-| F4        | 1	   |  115200   |   4            |  0.12~12         | 5~12           | false          | false    	  | 4.8~5.2   |
-| S4        | 4	   |  115200   |   4            |  0.10~8.0        | 5~12 (PWM)     | false          | false    	  | 4.8~5.2   |
-| S4B       | 4/11   |  153600   |   4            |  0.10~8.0        | 5~12(PWM)      | true(8)        | false    	  | 4.8~5.2   |
-| S2        | 4/12   |  115200   |   3            |  0.10~8.0     	| 4~8(PWM)       | false          | true    		  | 4.8~5.2   |
-| G4        | 5	   |  230400   |   9/8/4        |  0.28/0.26/0.1~16| 5~12        	  | false          | false    	  | 4.8~5.2   |
-| X4        | 6	   |  128000   |   5            |  0.12~10     		| 5~12(PWM)      | false          | false    	  | 4.8~5.2   |
-| X2/X2L    | 6	   |  115200   |   3            |  0.10~8.0     	| 4~8(PWM)       | false          | true    		  | 4.8~5.2   |
-| G4PRO     | 7	   |  230400   |   9/8/4        |  0.28/0.26/0.1~16| 5~12        	  | false          | false    	  | 4.8~5.2   |
-| F4PRO     | 8	   |  230400   |   4/6          |  0.12~12         | 5~12        	  | false          | false    	  | 4.8~5.2   |
-| R2        | 9	   |  230400   |   5            |  0.12~16     		| 5~12        	  | false          | false    	  | 4.8~5.2   |
-| G6        | 13     |  512000   |   18/16/8      |  0.28/0.26/0.1~25| 5~12        	  | false          | false    	  | 4.8~5.2   |
-| G2A       | 14	   |  230400   |   5            |  0.12~12         | 5~12      	  | false          | false    	  | 4.8~5.2   |
-| G2        | 15		|  230400   |   5            |  0.28~16     		| 5~12      	  | true(8)        | false    	  | 4.8~5.2   |
-| G2C       | 16		|  115200   |   4            |  0.1~12        	| 5~12      	  | false      	 | false    	  | 4.8~5.2   |
-| G4B       | 17		|  512000   |   10           |  0.12~16         | 5~12        	  | true(10)       | false    	  | 4.8~5.2   |
-| G4C       | 18		|  115200   |   4            |  0.1~12		      | 5~12           | false          | false    	  | 4.8~5.2   |
-| G1        | 19		|  230400   |   9            |  0.28~16         | 5~12      	  | false          | false    	  | 4.8~5.2   |
-| TX8    　 | 100	   |  115200   |   4            |  0.1~8      	   | 4~8(PWM)       | false          | true      	  | 4.8~5.2   |
-| TX20    　| 100	   |  115200   |   4            |  0.1~20      	   | 4~8(PWM)       | false          | true     	  | 4.8~5.2   |
-| TG15    　| 100	   |  512000   |   20/18/10     |  0.05~15      	| 3~16      	  | false          | false    	  | 4.8~5.2   |
-| TG30    　| 101	   |  512000   |   20/18/10     |  0.05~30      	| 3~16      	  | false          | false    	  | 4.8~5.2   |
-| TG50    　| 102	   |  512000   |   20/18/10     |  0.05~50      	| 3~16      	  | false          | false    	  | 4.8~5.2   |
+   ```
+   cd ydlidar_ros2_ws
+   colcon build --symlink-install
+   ```
+   Note: install colcon [see](https://index.ros.org/doc/ros2/Tutorials/Colcon-Tutorial/#install-colcon)
 
-   Note: PWM option speed control requires external PWM wave.
+   ![CMAKE Finished](images/finished.png  "CMAKE Finished")
 
-## Configuration
-path: [ydlidar.yaml](params/ydlidar.yaml)
+   <font color=Red size=4>>Note: If the following error occurs, Please install  [YDLIDAR/YDLidar-SDK](https://github.com/YDLIDAR/YDLidar-SDK) first.</font>
 
-## ros2-interfaces
+   ![CMAKE ERROR](images/cmake_error.png  "CMAKE ERROR")
 
-<center>
+3. Package environment setup :
 
+   `source ./install/setup.bash`
+
+    Note: Add permanent workspace environment variables.
+    It's convenientif the ROS2 environment variables are automatically added to your bash session every time a new shell is launched:
+    ```
+    $echo "source ~/ydlidar_ros2_ws/install/setup.bash" >> ~/.bashrc
+    $source ~/.bashrc
+    ```
+4. Confirmation
+    To confirm that your package path has been set, printenv the `grep -i ROS` variable.
+    ```
+    $ printenv | grep -i ROS
+    ```
+    You should see something similar to:
+        `OLDPWD=/home/tony/ydlidar_ros2_ws/install`
+
+5. Create serial port Alias [optional] 
+    ```
+	$chmod 0777 src/ydlidar_ros2_driver/startup/*
+	$sudo sh src/ydlidar_ros2_driver/startup/initenv.sh
+    ```
+    Note: After completing the previous operation, replug the LiDAR again.
+	
+## Configure LiDAR [paramters](params/ydlidar.yaml)
+```
+ydlidar_ros2_driver_node:
+  ros__parameters:
+    port: /dev/ttyUSB0
+    frame_id: laser_frame
+    ignore_array: ""
+    baudrate: 230400
+    lidar_type: 1
+    device_type: 0
+    sample_rate: 9
+    abnormal_check_count: 4
+    resolution_fixed: true
+    reversion: true
+    inverted: true
+    auto_reconnect: true
+    isSingleChannel: false
+    intensity: false
+    support_motor_dtr: false
+    angle_max: 180.0
+    angle_min: -180.0
+    range_max: 64.0
+    range_min: 0.01
+    frequency: 10.0
+    invalid_range_is_inf: false
+```
+
+## Run ydlidar_ros2_driver
+
+##### Run ydlidar_ros2_driver using launch file
+
+The command format is : 
+
+ `ros2 launch ydlidar_ros2_driver [launch file].py`
+
+1. Connect LiDAR uint(s).
+   ```
+   ros2 launch ydlidar_ros2_driver ydlidar_launch.py 
+   ```
+   or 
+
+   ```
+   launch $(ros2 pkg prefix ydlidar_ros2_driver)/share/ydlidar_ros2_driver/launch/ydlidar.py 
+   ```
+2. RVIZ 
+   ```
+   ros2 launch ydlidar_ros2_driver ydlidar_launch_view.py 
+   ```
+    ![View](images/view.png  "View")
+
+3. echo scan topic
+   ```
+   ros2 run ydlidar_ros2_driver ydlidar_ros2_driver_client or ros2 topic echo /scan
+   ```
+
+#####  Launch file introduction
+
+The driver offers users a wealth of options when using different launch file. The launch file directory    
+
+is `"ydlidar_ros2_ws/src/ydlidar_ros2_driver/launch"`. All launch files are listed as below : 
+
+| launch file               | features                                                     |
+| ------------------------- | ------------------------------------------------------------ |
+| ydlidar.py         | Connect to defualt paramters<br/>Publish LaserScan message on `scan` topic |
+| ydlidar_launch.py         | Connect ydlidar.yaml Lidar specified by configuration parameters<br/>Publish LaserScan message on `scan` topic |
+| ydlidar_launch_view.py         | Connect ydlidar.yaml Lidar specified by configuration parameters and setup RVIZ<br/>Publish LaserScan message on `scan` topic |
+
+
+
+## Publish Topic
 | Topic                | Type                    | Description                                      |
 |----------------------|-------------------------|--------------------------------------------------|
 | `scan`               | sensor_msgs/LaserScan   | 2D laser scan of the 0-angle ring                |
 
-| Parameter         | Type                    | Description                                         |
-|-----------------------|------------------------|-----------------------------------------------------|
-| `port`        		| String                 	| port of lidar (ex. /dev/ttyUSB0)                         		|
-| `baudrate`     	| int                      	| baudrate of lidar (ex. 230400)           				|
-| `frame_id`      	| String                	| TF frame of sensor, default: `laser_frame`    		|
-| `singleChannel`  	| bool                     	| Whether LiDAR is a single-channel, default: false	|
-| `resolution_fixed` | bool                     	| Fixed angluar resolution, default: true                    	|
-| `auto_reconnect` | bool                  	| Automatically reconnect the LiDAR, default: true    	|
-| `reversion`     	| bool                  	| Reversion LiDAR, default: true  					|
-| `isToFLidar`       	| bool                  	| Whether LiDAR is TOF Type, default: false  		|
-| `angle_min`       	| float                 	| Minimum Valid Angle, defalut: -180.0     			|
-| `angle_max`       	| float                  	| Maximum Valid Angle, defalut: 180.0      			|
-| `range_min`       	| float                  	| Minimum Valid range, defalut: 0.01m      			|
-| `range_max`       	| float                  	| Maximum Valid range, defalut: 64.0m      			|
-| `ignore_array`      | String                  	| LiDAR filtering angle area, default: ""      			|
-| `samp_rate`       	| int                  	| sampling rate of lidar, default: 9      				|
-| `frequency`       	| float                  	| scan frequency of lidar,default: 10.0      			|
-
-</center>
-
-## Parameters
-port (string, default: /dev/ydlidar)
-
-    serial port name used in your system. 
-
-baudrate (int, default: 230400)
-
-    serial port baud rate. 
-    
-| LiDAR                					| baudrate               | 
-|-----------------------------------------------|-----------------------|
-|F4/S2/X2/X2L/S4/TX8/TX20/G4C 		| 115200			|
-|X4                   					| 128000			|
-|S4B                         				| 153600			|
-|G1/G2/R2/G4/G4PRO/F4PRO         	| 230400			|
-|G6/TG15/TG30/TG50			 	| 512000			|
-
-frame_id (string, default: laser_frame)
-
-    frame ID for the device. 
-
-singleChannel (bool, default: false)
-
-    indicated whether the LIDAR is single communication(S2) lidar.
-    
-| LiDAR                							| singleChannel       | 
-|-----------------------------------------------------------|-----------------------|
-|G1/G2/G4/G6/F4/F4PRO/S4/S4B/X4/R2/G4C 	| false			|
-|S2/X2/X2L                   						| true			|
-|TG15/TG30/TG50                         				| false			|
-|TX8/TX20         							| true			|
-
-resolution_fixed (bool, default: true)
-
-    indicated whether the LIDAR has a fixed angular resolution. 
-
-auto_reconnect (bool, default: true)
-
-    indicated whether the LIDAR auto reconnection. 
-
-reversion (bool, default: false)
-
-    indicated whether the LIDAR data rotation 180°. 
-    
-| LiDAR                								| reversion              | 
-|-----------------------------------------------------------------|-----------------------|
-|G1/G2/G4/G6/F4/F4PRO//R2/G4C/TG15/TG30/TG50 	| true			|
-|S2/X2/X2L/S4/S4B/X4/TX8/TX20                   			| false			|
-
-
-isToFLidar (bool, default: false)
-
-    indicated whether the LIDAR is TOF(TX8) lidar. 
-    
-| LiDAR                									| isToFLidar             | 
-|-----------------------------------------------------------------------|-----------------------|
-|G1/G2/G4/G6/F4/F4PRO/S4/S4B/X4/R2/G4C/S2/X2/X2L 	| false			|
-|TG15/TG30/TG50/TX8/TX20                   				| true			|
-
-
-angle_min (double, default: -180)
-
-    Min valid angle (°) for LIDAR data. 
-
-angle_max (double, default: 180)
-
-    Max valid angle (°) for LIDAR data. 
-
-range_min (double, default: 0.08)
-
-    Min valid range (m) for LIDAR data. 
-
-range_max (double, default: 32.0)
-
-    Max valid range (m) for LIDAR data. 
-
-ignore_array (string, default: "")
-
-    Set the current angle range value to zero.
-    
-    Note: ignore 10 to 20 and 50 to 80, ex: "10, 20, 50, 80" 
-
-samp_rate (int, default: 9)
-
-    the LIDAR sampling frequency.
-    
-| LiDAR                		| samp_rate             | 
-|-----------------------------|------------------------|
-|G4/F4                    		| 4,8,9			 |
-|F4PRO                   		| 4,6   			 |
-|G6                         		| 8,16,18			 |
-|G1/G2/R2/X4         		| 5				 |
-|S4/S4B/G4C/TX8/TX20 	|4			 	 |
-|S2                    		| 3			 	 |
-|TG15/TG30/TG50           | 10,18,20		 |
-
-
-frequency (double, default: 10)
-
-    the LIDAR scanning frequency.
-
-
-Note: Specific LiDAR paramter configuration, refer to [Dataset](#dataset)
+## Subscribe Service
+| Service                | Type                    | Description                                      |
+|----------------------|-------------------------|--------------------------------------------------|
+| `stop_scan`          | std_srvs::Empty   | turn off lidar                                         |
+| `start_scan`         | std_srvs::Empty   | turn on lidar                                          |
 
 
 
+## Configure ydlidar_ros_driver internal parameter
 
-## Upgrade Log
+The ydlidar_ros2_driver internal parameters are in the launch file, they are listed as below :
 
-2020-02-08 version:1.4.5
-
-   1.Update SDK to 1.4.5
-
-   2.fixed ROS2 Dashing and Eloquent.
-
-2019-12-23 version:1.4.4
-
-   1.support all standards lidar
-
-
-2018-07-16 version:1.3.6
-
-   1.Update SDK verison to 1.3.9
- 
-   2.remove imu sync.
-
-2018-07-16 version:1.3.5
-
-   1.Update SDK verison to 1.3.6
-
-   2.add imu sync.
-
-2018-04-16 version:1.3.1
-
-   1.Update SDK verison to 1.3.1
-
-   2.Increase sampling frequency,scan frequency setting.
-
-   3.Unified coordinate system.
-
-   4.Repair X4,S4 LIDAR cannot be opened.
-
-   5.Increased G4 G4C F4Pro LIDAR power-off protection.
-
-   6.Increased S4B LIDAR low optical power setting.
-
-   7.Fix the wait time for closing ros node.
-   
-   8.Compensate for each laser point timestamp.
-
-   9.Unified profile, automatic correction lidar model.
-
-# 6 Support
-
-You can get support from YDLidar with the following methods:
-* Send email to support@ydlidar.com with a clear description of your problem and your setup
-* Github Issues
+| Parameter name | Data Type | detail                                                       |
+| -------------- | ------- | ------------------------------------------------------------ |
+| port         | string | Set Lidar the serial port or IP address <br/>it can be set to `/dev/ttyUSB0`, `192.168.1.11`, etc. <br/>default: `/dev/ydlidar` |
+| frame_id     | string | Lidar TF coordinate system name. <br/>default: `laser_frame` |
+| ignore_array | string | LiDAR filtering angle area<br/>eg: `-90, -80, 30, 40` |
+| baudrate     | int | Lidar baudrate or network port. <br/>default: `230400` |
+| lidar_type     | int | Set lidar type <br/>0 -- TYPE_TOF<br/>1 -- TYPE_TRIANGLE<br/>2 -- TYPE_TOF_NET <br/>default: `1` |
+| device_type     | int | Set device type <br/>0 -- YDLIDAR_TYPE_SERIAL<br/>1 -- YDLIDAR_TYPE_TCP<br/>2 -- YDLIDAR_TYPE_UDP <br/>default: `0` |
+| sample_rate     | int | Set Lidar Sample Rate. <br/>default: `9` |
+| abnormal_check_count     | int | Set the number of abnormal startup data attempts. <br/>default: `4` |
+| fixed_resolution     | bool | Fixed angluar resolution. <br/>default: `true` |
+| reversion     | bool | Reversion LiDAR. <br/>default: `true` |
+| inverted     | bool | Inverted LiDAR.<br/>false -- ClockWise.<br/>true -- CounterClockWise  <br/>default: `true` |
+| auto_reconnect     | bool | Automatically reconnect the LiDAR.<br/>true -- hot plug. <br/>default: `true` |
+| isSingleChannel     | bool | Whether LiDAR is a single-channel.<br/>default: `false` |
+| intensity     | bool | Whether LiDAR has intensity.<br/>true -- G2 LiDAR.<br/>default: `false` |
+| support_motor_dtr     | bool | Whether the Lidar can be started and stopped by Serial DTR.<br/>default: `false` |
+| angle_min     | float | Minimum Valid Angle.<br/>default: `-180` |
+| angle_max     | float | Maximum Valid Angle.<br/>default: `180` |
+| range_min     | float | Minimum Valid range.<br/>default: `0.1` |
+| range_max     | float | Maximum Valid range.<br/>default: `16.0` |
+| frequency     | float | Set Scanning Frequency.<br/>default: `10.0` |
+| invalid_range_is_inf     | bool | Invalid Range is inf.<br/>true -- inf.<br/>false -- 0.0.<br/>default: `false` |
+More paramters details, see [here](details.md)
 
 ## Contact EAI
-
-![Development Path](sdk/image/EAI.png)
+![Development Path](images/EAI.png)
 
 If you have any extra questions, please feel free to [contact us](http://www.ydlidar.cn/cn/contact)
 

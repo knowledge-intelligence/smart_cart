@@ -4,10 +4,10 @@ from ros2run.api import get_executable_path
 
 def launch(launch_descriptor, argv):
     ld = launch_descriptor
-    package = 'ydlidar'
+    package = 'ydlidar_ros2_driver'
     ld.add_process(
-        cmd=[get_executable_path(package_name=package, executable_name='ydlidar_node')],
-        name='ydlidar_node',
+        cmd=[get_executable_path(package_name=package, executable_name='ydlidar_ros2_driver_node')],
+        name='ydlidar_ros2_driver_node',
         exit_handler=restart_exit_handler,
     )
     package = 'tf2_ros'
@@ -20,8 +20,8 @@ def launch(launch_descriptor, argv):
                 package_name=package, executable_name='static_transform_publisher'),
             '0', '0', '0.02',
             '0', '0', '0', '1',
-            'base_footprint',
-            'base_scan'
+            'base_link',
+            'laser_frame'
         ],
         name='static_tf_pub_laser',
         exit_handler=restart_exit_handler,
